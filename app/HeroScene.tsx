@@ -26,7 +26,7 @@ export default function HeroScene() {
     <div className="colorBendsFrame"><ColorBends rotation={275} speed={0.75} colors={["#0027ff","#ff0000","#6787ff"]} transparent autoRotate={0.3} scale={2} frequency={1} warpStrength={1} mouseInfluence={2.3} parallax={1.4} noise={0.15} iterations={1} intensity={1.5} bandWidth={4.5}/></div>
     <div className="heroHeadline">
       <p>PORTFOLIO · PRODUCT DESIGNER</p>
-      <h1>Design products that<br/><span>people remember</span></h1>
+      <h1 className="editorialTitle"><span className="editorialLeadLine">Design products that</span><span className="editorialLine">people remember</span></h1>
       <h2>AI × UI × Motion — turning complex ideas into clear, memorable digital experiences.</h2>
       <a href="#work">Explore selected work <b>→</b></a>
     </div>

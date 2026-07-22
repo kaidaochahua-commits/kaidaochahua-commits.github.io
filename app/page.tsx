@@ -1,60 +1,78 @@
 import HeroScene from "./HeroScene";
 import InteractionLayer from "./InteractionLayer";
+import MicrosoftStorageModal from "./MicrosoftStorageModal";
+import BorderGlow from "./BorderGlow";
+import Galaxy from "./Galaxy";
+import CapabilityIcon from "./CapabilityIcon";
+import GradualBlur from "./GradualBlur";
+import MotionDirector from "./MotionDirector";
+
+const projectGlowProps = {
+  edgeSensitivity: 24,
+  glowColor: "199 48 74",
+  backgroundColor: "#111313",
+  borderRadius: 18,
+  glowRadius: 34,
+  glowIntensity: 0.85,
+  coneSpread: 22,
+  fillOpacity: 0.28,
+  colors: ["#f47b43", "#9fc7d9", "#9b8cff"],
+};
 
 const projects = [
   {
     no: "01",
-    name: "Hickey",
+    name: "Microsoft Storage Cabinet",
     type: "Global Social Product",
     role: "Design Lead · 0—1",
     result: "TOP 10 · US APP STORE",
     metrics: [["TOP 10", "US App Store"], ["0—1", "Full-cycle design"]],
     theme: "hickey",
-    label: "Social discovery, reimagined.",
+    label: "Smart Cabinet Design",
     cover: "/project-covers/01.png",
   },
   {
     no: "02",
-    name: "PicPals",
+    name: "SHIQI Group Official Website",
     type: "Global Social Product",
     role: "Design Lead · 0—1",
     result: "FROM CONCEPT TO MVP",
     metrics: [["0—1", "Product design"], ["MVP", "Launch delivery"]],
     theme: "picpals",
-    label: "A closer way to stay connected.",
+    label: "Corporate Website Design",
     cover: "/project-covers/02.png",
   },
   {
     no: "03",
-    name: "赫兹 · Hertz",
+    name: "Hickey",
     type: "Social Experience",
     role: "Lead Experience Designer",
     result: "PRODUCT REDESIGN",
     metrics: [["10M+", "Daily active users"], ["REDESIGN", "Experience upgrade"]],
     theme: "hertz",
-    label: "Make every voice feel present.",
+    label: "Fun for All",
     cover: "/project-covers/03.png",
   },
   {
     no: "04",
-    name: "Digital Experience",
+    name: "SHIQI Base",
     type: "Product Design",
     role: "UX · UI · Motion",
     result: "SELECTED WORK",
     metrics: [],
     theme: "digital-experience",
-    label: "Crafted for clarity and impact.",
+    label: "Designers' Learning Community",
     cover: "/project-covers/04.png",
   },
   {
     no: "05",
-    name: "Creative Direction",
+    name: "VIVO Global Theme Competition",
     type: "Visual Design",
     role: "Concept · Art Direction",
     result: "SELECTED WORK",
     metrics: [],
     theme: "creative-direction",
-    label: "Ideas shaped into visual systems.",
+    label: "One in Ten Million Light-Year Project",
     cover: "/project-covers/05.png",
   },
 ];
@@ -69,10 +87,28 @@ const capabilities = [
 export default function Home() {
   return (
     <main>
+      <MotionDirector />
       <InteractionLayer />
+      <GradualBlur
+        target="page"
+        position="bottom"
+        height="12rem"
+        strength={3.6}
+        divCount={9}
+        curve="bezier"
+        exponential
+        opacity={1}
+        animated="scroll"
+        duration="0.28s"
+        easing="cubic-bezier(.2,.8,.2,1)"
+        zIndex={0}
+        className="site-scroll-blur"
+      />
       <section className="hero" id="home">
         <header className="nav shell">
-          <a className="monogram" href="#home" aria-label="Chahua home">C<span>·</span>H</a>
+          <a className="brandLogo" href="#home" aria-label="Chahua home">
+            <img src="/brand-logo.png" alt="开到茶花 Ricky" />
+          </a>
           <nav aria-label="Main navigation">
             <a href="#work">Work</a><a href="#about">About</a><a href="#capabilities">Capabilities</a>
           </nav>
@@ -84,7 +120,7 @@ export default function Home() {
       <section className="about section shell" id="about">
         <div className="aboutEyebrow"><i /> WHY CHOOSE ME</div>
         <div className="aboutHeader">
-          <h2>MEET THE MIND<br /><span>BEHIND THE WORK</span></h2>
+          <h2 className="editorialTitle"><span className="editorialLeadLine">Meet the mind</span><span className="editorialLine">Behind the work</span></h2>
           <div className="aboutSocial"><a href="mailto:1175161326@qq.com">EMAIL</a><a href="https://dribbble.com/CHAHUA" target="_blank">DR</a><a href="https://uikee.zcool.com.cn/" target="_blank">ZC</a></div>
         </div>
         <div className="aboutShowcase">
@@ -113,15 +149,23 @@ export default function Home() {
       <section className="work section" id="work">
         <div className="shell">
           <div className="sectionTop"><span>02 / SELECTED WORK</span><span>2018—2026</span></div>
-          <div className="workHeading"><div><span className="workKicker">CASE STUDIES</span><h2>My success stories</h2></div><a className="seeWork" href="#contact">Discuss a project <span>↗</span></a></div>
+          <div className="workHeading"><div><span className="workKicker">CASE STUDIES</span><h2 className="editorialTitle"><span className="editorialLeadLine">My success</span><span className="editorialLine">stories</span></h2></div><a className="seeWork" href="#contact">Discuss a project <span>↗</span></a></div>
           <div className="projects">
-            {projects.map((project) => (
+            {projects.map((project) => project.no === "01" ? (
+              <MicrosoftStorageModal project={project} key={project.name} />
+            ) : (
               <article className={`project ${project.theme}`} key={project.name}>
-                <div className="projectVisual">
-                  <img className="projectCover" src={project.cover} alt={`${project.name} project cover`} />
-                  <a className="projectArrow" href="#contact" aria-label={`Discuss ${project.name}`}>↗</a>
-                </div>
-                <div className="projectInfo"><span>{project.no}</span><div><h3>{project.name} — {project.label}</h3><div className="projectTags"><i>{project.type}</i><i>{project.role}</i><i>{project.result}</i></div></div></div>
+                <BorderGlow className="projectGlow" {...projectGlowProps}>
+                  <a
+                    className="projectVisual"
+                    href="#contact"
+                    aria-label={`Discuss ${project.name}`}
+                  >
+                    <img className="projectCover" src={project.cover} alt={`${project.name} project cover`} />
+                    <span className="projectArrow" aria-hidden="true">↗</span>
+                  </a>
+                </BorderGlow>
+                <div className="projectInfo"><span>{project.no}</span><div><h3><a href="#contact">{project.name} — {project.label}</a></h3><div className="projectTags"><i>{project.type}</i><i>{project.role}</i><i>{project.result}</i></div></div></div>
               </article>
             ))}
           </div>
@@ -130,19 +174,34 @@ export default function Home() {
 
       <section className="capabilities section shell" id="capabilities">
         <div className="sectionTop"><span>03 / CAPABILITIES</span><span>HOW I CREATE VALUE</span></div>
-        <div className="capIntro"><h2>FROM DIRECTION<br />TO <em>DELIVERY.</em></h2><p>不仅定义设计，也确保它真实发生。<br /><span>I define the direction, build the system,<br />and stay until it ships.</span></p></div>
+        <div className="capIntro"><h2 className="editorialTitle"><span className="editorialLeadLine">FROM DIRECTION</span><span className="editorialLine">TO DELIVERY.</span></h2><p>不仅定义设计，也确保它真实发生。<br /><span>I define the direction, build the system,<br />and stay until it ships.</span></p></div>
         <div className="capGrid">
-          {capabilities.map(([no, title, en, text]) => <article key={no}><span>{no}</span><div className="capIcon">{no === "01" ? "✦" : no === "02" ? "◒" : no === "03" ? "⌁" : "↗"}</div><h3>{title}</h3><h4>{en}</h4><p>{text}</p></article>)}
+          {capabilities.map(([no, title, en, text]) => <article key={no}><span>{no}</span><div className="capIcon"><CapabilityIcon no={no} /></div><h3>{title}</h3><h4>{en}</h4><p>{text}</p></article>)}
         </div>
         <div className="process"><span>RESEARCH</span><i>→</i><span>ANALYZE</span><i>→</i><span>DEFINE</span><i>→</i><span>DESIGN</span><i>→</i><span>DELIVER</span><i>→</i><span>ITERATE</span></div>
       </section>
 
       <footer className="contact" id="contact">
-        <div className="contactOrb" />
+        <div className="contactGalaxy">
+          <Galaxy
+            starSpeed={0.5}
+            density={0.5}
+            hueShift={0}
+            speed={0.4}
+            glowIntensity={0.25}
+            saturation={0}
+            mouseRepulsion
+            repulsionStrength={1}
+            twinkleIntensity={1}
+            rotationSpeed={0.05}
+            transparent
+          />
+        </div>
+        <div className="contactVeil" />
         <div className="shell contactInner">
           <div className="sectionTop"><span>04 / CONTACT</span><span>SHANGHAI · GMT+8</span></div>
           <div className="availability"><i /> AVAILABLE FOR FULL-TIME · PROJECTS · CONSULTING</div>
-          <h2>LET’S MAKE<br />SOMETHING <em>MATTER.</em></h2>
+          <h2 className="editorialTitle"><span className="editorialLeadLine">LET’S MAKE</span><span className="editorialLine">SOMETHING MATTER.</span></h2>
           <a className="mail" href="mailto:1175161326@qq.com">1175161326@qq.com <span>↗</span></a>
           <div className="contactBottom">
             <p>如果你正在寻找兼具设计能力、审美判断和项目把控能力的合作伙伴，欢迎与我联系。</p>

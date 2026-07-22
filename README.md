@@ -1,4 +1,6 @@
-# vinext-starter
+# Ricky Peng — Personal Portfolio
+
+开到茶花的个人作品集网站。推送到 `main` 分支后，GitHub Actions 会自动构建并发布到 GitHub Pages。
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
@@ -11,9 +13,9 @@ Drizzle support.
 ## Quick Start
 
 ```bash
-npm install
-npm run dev
-npm run build
+pnpm install
+pnpm dev
+pnpm build:pages
 ```
 
 This starter does not use `wrangler.jsonc`.
